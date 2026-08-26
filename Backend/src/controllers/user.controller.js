@@ -4,16 +4,24 @@ const bcrypt = require("bcryptjs");
 
 
 const register = async (req, res) => {
-    const { email, name, password } = req.body;
+    const { email, name, password, role ,phone} = req.body;
 
 
     try {
-        if (!name || !email || !password || !role) {
+        if (!name || !email || !password || !role ) {
             return res.json({
                 success: false,
                 message: "All feild are required"
             })
         }
+
+
+        const allowedRoles = ["admin", "customer", "driver"];
+        if (!allowedRoles.includes(role)) {
+            return res.json({ success: false, message: "Invalid role" });
+        }
+
+        
 
         const existingUser = await User.findOne({ email });
 
@@ -30,7 +38,8 @@ const register = async (req, res) => {
             name,
             email,
             password: hash,
-            role
+            role,
+            phone
         })
 
         const token = jwt.sign(
@@ -48,7 +57,8 @@ const register = async (req, res) => {
                 id: user._id,
                 name: user.name,
                 email: user.email,
-                role: user.role
+                role: user.role,
+                number : user.phone
             }
         })
 
@@ -76,8 +86,7 @@ const login = async (req, res) => {
             })
         }
 
-        const user = await User.findOne({ email });
-
+const user = await User.findOne({ email }).select("+password");
         if (!user) {
             return res.json({
                 success: false,
@@ -109,7 +118,8 @@ const login = async (req, res) => {
                 id: user._id,
                 name: user.name,
                 email: user.email,
-                role: user.role
+                role: user.role,
+                number : user.phone
             }
         })
 
