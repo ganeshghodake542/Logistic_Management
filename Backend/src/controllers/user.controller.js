@@ -122,3 +122,42 @@ const login = async (req, res) => {
     }
 
 }
+
+
+const logout = async (req, res) => {
+
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    });
+
+    res.status(200).json({ message: "Logged out successfully" });
+}
+
+
+
+const me = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select("-password");
+        if (!user) {
+            return res.json({
+                success: false,
+                message: "User not found"
+            })
+        }
+
+        res.status(200).json({ user });
+
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Server error",
+            error: error.message
+        });
+    }
+}
+
+
+
+module.exports = { register, login, logout, me };
