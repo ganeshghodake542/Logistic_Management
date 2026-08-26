@@ -3,11 +3,11 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 
-const register = async(req, res) => {
-    const {email , name , password} = req.body;
+const register = async (req, res) => {
+    const { email, name, password } = req.body;
 
 
-     try {
+    try {
         if (!name || !email || !password || !role) {
             return res.json({
                 success: false,
@@ -59,4 +59,66 @@ const register = async(req, res) => {
             message: err.message
         })
     }
+}
+
+
+
+const login = async (req, res) => {
+
+
+    try {
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.json({
+                success: false,
+                message: " Email and passeword is required ",
+            })
+        }
+
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.json({
+                success: false,
+                message: "Invalid Credential"
+            })
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password)
+        if (!isMatch) {
+            return res.json({
+                success: false,
+                message: "Password is Incorrect"
+            })
+        }
+
+
+        const token = jwt.sign(
+            { id: user._id, role: user.role },
+            process.env.JWT_SECRET,
+            { expiresIn: "7d" }
+        );
+        res.cookie("token", token);
+
+
+        return res.status(200).json({
+            success: true,
+            message: "User logged in successfully",
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role
+            }
+        })
+
+
+    } catch (err) {
+        res.json({
+            success: false,
+            message: err.message
+        });
+    }
+
 }
