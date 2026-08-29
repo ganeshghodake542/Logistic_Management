@@ -40,17 +40,17 @@ const AuthProvider = ({ children }) => {
     }
 
 
-    const register = async (formData)=>{
+    const register = async (formData) => {
         const res = await api.post("/user/register", formData);
 
-        if(res.data.success){
+        if (res.data.success) {
             setUser(res.data.user);
             return res.data.user;
         }
         throw new Error(res.data.message);
     }
 
-    const logout = async ()=>{
+    const logout = async () => {
         await api.post("/user/logout");
         setUser(null);
     }
