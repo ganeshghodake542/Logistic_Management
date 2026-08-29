@@ -34,19 +34,58 @@ const AuthPage = () => {
             }
 
 
-            if (loggedInUser.role == "admin"){
+            if (loggedInUser.role == "admin") {
                 navigate("/admin/dashboard")
             }
-            else if (loggedInUser.role == "coustomer"){
+            else if (loggedInUser.role == "coustomer") {
                 navigate("/coustomer/dashboard")
             }
-            else{
+            else {
                 navigate("/driver/dashboard")
             }
 
 
         } catch (error) {
 
+            console.error("Login error:", error);
+            setError(error?.response?.data?.message || error.message || "Login failed. Please try again.");
+
+        } finally {
+            setLoading(false);
+        }
+    }
+
+
+
+
+    const [regData, setRegData] = useState({
+        name: "",
+        email:"",
+        role:"",
+        password:"",
+    });
+
+    const[regError ,setregError] = useState("");
+    const[regLoading, setRegLoading] = useState(false);
+
+    const regHandleChange = async(e)=>{
+        setRegData({...regData , [e.target.name] : e.target.value})
+    }
+
+    const handleRegSubmit = async(e)=>{
+        e.preventDefault();
+        setregError("");
+        setRegLoading(true);
+
+
+        try {
+            await register(regData);
+            navigate("/")
+        } catch (error) {
+            console.error("Register error:", error);
+        }
+        finally{
+            setLoading(false);
         }
     }
 
@@ -54,6 +93,10 @@ const AuthPage = () => {
 
     return (
         <div>
+
+
+            
+
 
         </div>
     )
