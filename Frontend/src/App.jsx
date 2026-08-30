@@ -1,15 +1,20 @@
 import React from 'react'
-import {Routes, Route} from "react-router-dom"
-import AuthProvider from "./contexts/AuthContext"
+import { Routes, Route } from "react-router-dom"
+import {AuthProvider} from "./contexts/AuthContext"
+import AuthPage from './pages/authPage'
 
 const App = () => {
   return (
     <div>
       <AuthProvider>
-      <Routes>
+        <Routes>
 
+          {/* <AuthPage />
+          <Route></Route> */}
+          <Route path="/login" element={<AuthPage />} />
+          <Route path="/register" element={<AuthPage />} />
 
-      </Routes>
+        </Routes>
       </AuthProvider>
     </div>
   )

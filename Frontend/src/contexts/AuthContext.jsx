@@ -9,7 +9,7 @@ const AuthProvider = ({ children }) => {
 
 
     const [user, setUser] = useState("");
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
 
 
@@ -63,4 +63,6 @@ const AuthProvider = ({ children }) => {
     )
 }
 
-export const useAuth = () => useContext(AuthProvider);
+
+export { AuthContext, AuthProvider };
+export const useAuth = () => useContext(AuthContext);
