@@ -2,16 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
-// Chocolate palette
-// bg      : #FBF4EC  (warm cream)
-// panel   : #FFFFFF
-// text    : #2E1A0F  (dark cocoa)
-// muted   : #8A6A54  (mocha)
-// primary : #5C3A21  (coffee bean)
-// primary-hover : #47301C
-// accent  : #C17F42  (caramel)
-// border  : #E4D3C1
-// error   : #B3452C  (burnt sienna)
 
 const AuthPage = () => {
     const location = useLocation();
@@ -87,11 +77,10 @@ const AuthPage = () => {
                         type="button"
                         key={r}
                         onClick={() => onChange(val)}
-                        className={`rounded-lg border px-3.5 py-2.5 text-sm font-medium transition ${
-                            active
+                        className={`rounded-lg border px-3.5 py-2.5 text-sm font-medium transition ${active
                                 ? "border-[#5C3A21] bg-[#F1E2CF] text-[#3E2A18]"
                                 : "border-[#E4D3C1] text-[#8A6A54] hover:bg-[#FBF4EC]"
-                        }`}
+                            }`}
                     >
                         {r}
                     </button>
@@ -108,9 +97,8 @@ const AuthPage = () => {
                 <div className="relative lg:min-h-[610px]">
                     {/* ---- Forms panel: slides between left/right half on desktop ---- */}
                     <div
-                        className={`w-full bg-white px-8 py-10 transition-all duration-700 ease-in-out sm:px-10 lg:absolute lg:inset-y-0 lg:z-20 lg:flex lg:w-1/2 lg:flex-col lg:justify-center lg:overflow-y-auto ${
-                            isLogin ? "lg:left-0" : "lg:left-1/2"
-                        }`}
+                        className={`w-full bg-white px-8 py-10 transition-all duration-700 ease-in-out sm:px-10 lg:absolute lg:inset-y-0 lg:z-20 lg:flex lg:w-1/2 lg:flex-col lg:justify-center lg:overflow-y-auto ${isLogin ? "lg:left-0" : "lg:left-1/2"
+                            }`}
                     >
                         <h1 className="text-[26px] font-bold text-[#2E1A0F]">
                             {isLogin ? "Welcome back" : "Create your account"}
@@ -268,9 +256,8 @@ const AuthPage = () => {
                         <div className="relative z-10 max-w-sm px-10 text-center">
                             {/* Panel 1 — shown while on login */}
                             <div
-                                className={`transition-all duration-500 ${
-                                    isLogin ? "opacity-100 delay-300" : "pointer-events-none absolute inset-0 opacity-0"
-                                }`}
+                                className={`transition-all duration-500 ${isLogin ? "opacity-100 delay-300" : "pointer-events-none absolute inset-0 opacity-0"
+                                    }`}
                             >
                                 <h2 className="mt-6 text-[28px] font-bold leading-tight">New here?</h2>
                                 <p className="mt-3 text-sm leading-relaxed text-[#F1E2CF]">
@@ -287,9 +274,8 @@ const AuthPage = () => {
 
                             {/* Panel 2 — shown while on register */}
                             <div
-                                className={`transition-all duration-500 ${
-                                    !isLogin ? "opacity-100 delay-300" : "pointer-events-none absolute inset-0 opacity-0"
-                                }`}
+                                className={`transition-all duration-500 ${!isLogin ? "opacity-100 delay-300" : "pointer-events-none absolute inset-0 opacity-0"
+                                    }`}
                             >
                                 <h2 className="mt-6 text-[28px] font-bold leading-tight">Already a member?</h2>
                                 <p className="mt-3 text-sm leading-relaxed text-[#F1E2CF]">
@@ -303,6 +289,7 @@ const AuthPage = () => {
                                     Login
                                 </button>
                             </div>
+
                         </div>
                     </div>
                 </div>
