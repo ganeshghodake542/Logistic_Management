@@ -75,18 +75,15 @@ const Navbar = () => {
                 </button>
             </div>
 
-            {/* Mobile dropdown */}
+            {/* Mobile open menu */}
             {menuOpen && (
                 <div className="md:hidden flex flex-col gap-1 px-5 pb-5 bg-[#F8F0E3] border-t border-[#E5D5BE]">
                     {navLinks.map((link) => {
                         const isActive = location.pathname === link.path
                         return (
-                            <button
-                                key={link.path}
-                                onClick={() => handleNav(link.path)}
-                                className={`text-left py-3 font-medium border-b border-[#EFE3D0] ${
-                                    isActive ? "text-[#4A2A16]" : "text-[#6B4E36]"
-                                }`}
+                            <button key={link.path}  onClick={() => handleNav(link.path)}
+                                className={`text-left py-3 font-medium border-b border-[#EFE3D0] 
+                                ${ isActive ? "text-[#4A2A16]" : "text-[#6B4E36]" }`}
                             >
                                 {link.label}
                             </button>
