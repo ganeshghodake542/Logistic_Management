@@ -9,6 +9,7 @@ import {
   Navigation,
 } from "lucide-react"
 import { useNavigate } from 'react-router-dom'
+import Footer from '../components/Footer'
 
 const features = [
   {
@@ -38,11 +39,11 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className='bg-[#FBF3E7] min-h-screen'>
+    <div className='bg-[#FBF3E7] min-h-screen '>
 
       <Navbar />
 
-      <section className='relative overflow-hidden px-6 sm:px-10 pt-16 pb-20 lg:pt-20 lg:pb-28'>
+      <section className='relative overflow-hidden px-6 sm:px-10 pt-16 pb-20 lg:pt-20  lg:pb-28'>
         <div className='max-w-7xl max-auto grid lg:grid-cols-2 gap-16 items-center relative z-10'>
           <div className='lg:pl-10'>
 
@@ -91,11 +92,37 @@ const LandingPage = () => {
             <img src="dashboard.png" alt="" className='border-2 border-[#3A2415] rounded-2xl ' />
           </div>
 
+        </div>
 
+        <div className='absolute -top-10 -left-10 w-40 h-40 bg-[#EFE0C8] rounded-full opacity-70 -z-0 ' />
+        <div className="absolute top-1/3 -right-16 w-64 h-64 bg-[#EFE0C8] rounded-full opacity-50 -z-0" />
 
+      </section>
+
+      <section className='px-6 sm:px-10 pb-20'>
+        <div className='max-w-7xl max-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-6'>
+          {
+            features.map(({ icon: Icon, title, desc }) => (
+              <div key={title} className='bg-white border border-[#EFE0C8] rounded-2xl p-6 relative'>
+                <div className="w-12 h-12 rounded-full bg-[#3A2415] text-white flex items-center justify-center mb-4">
+                  <Icon size={20} />
+                </div>
+                <h3 className='font-bold text-[#3A2415] mb-2 '>{title}</h3>
+                <p className="text-sm text-[#6B5947] leading-relaxed pr-6">
+                  {desc}
+                </p>
+                <button aria-label={`Learn more about ${title}`} className='absolute bottom-6 right-6 w-9 h-9 rounded-full bg-[#FBF3E7] flex items-center justify-center text-[#3A2415] hover:bg-[#EFE0C8] transition-colors'>
+                  <ArrowRight size={16} />
+                </button>
+              </div>
+
+            ))
+          }
         </div>
 
       </section>
+
+      <Footer/>
 
 
     </div>
